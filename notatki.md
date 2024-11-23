@@ -7,6 +7,8 @@ https://code.visualstudio.com/
 node -v
 v20.17.0
 
+Help -> About -> 1.93.1
+
 ## Node
 
 https://nodejs.org/en
