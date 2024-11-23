@@ -142,3 +142,6 @@ playwright test --project=my-mobile-chromium
 
 - npm test  -> npm run test
 - npm run banana  -> scripts: banana 
+
+# VsCode playwright Extension
+https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright
