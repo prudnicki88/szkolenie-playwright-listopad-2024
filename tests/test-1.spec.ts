@@ -15,6 +15,20 @@ test("test", async ({ page }) => {
   await expect(page.locator("#introduction")).toContainText("Introduction");
 });
 
+
+test("Tabs by header", async ({ page }) => {
+  // Recording...
+  await page.goto("https://playwright.dev/");
+  await page.getByRole("link", { name: "Get started" }).click();
+
+  page.locator("css=.tabs-container");
+  page.getByText("Running the Example Test");
+  
+  page.locator("css=#running-the-example-test")
+
+
+})
+
 test("npm command is correct", async ({ page }) => {
   // Recording...
   await page.goto("https://playwright.dev/");
@@ -37,8 +51,8 @@ test("npm command is correct", async ({ page }) => {
   ).toBeVisible();
 
   const FirstContainer = page.locator("css=.tabs-container").first();
-
   const Tabs = FirstContainer.locator("css=ul.tabs").getByRole("tab");
+  const NpmTab = FirstContainer.locator("css=ul.tabs").getByRole("tab").getByText('npm')
 
   // await expect(Tabs).toHaveText(['npm','yarn','banana'])
   await expect(Tabs).toHaveText(["npm", "yarn", "pnpm"]);
