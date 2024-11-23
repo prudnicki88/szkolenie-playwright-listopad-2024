@@ -153,3 +153,10 @@ https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright
 
 Format with -> default formatter
 Alt+Shift+F
+
+# CSS Dinner
+plate
+
+https://flukeout.github.io/
+https://topswagcode.com/xpath/
+
