@@ -31,13 +31,13 @@ F1 -> Git Clone -> {Wklej urk} -> Clone from URL -> Select location -> Open wind
 https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings
 
 
-# Playwright
+# Playwright New Project
+cd ../moj/katalog
+
 npm init playwright@latest
 
 Getting started with writing end-to-end tests with Playwright:
 Initializing project in '.'
-? Do you want to use TypeScript or JavaScript? ...
-> `TypeScript`
 √ Do you want to use TypeScript or JavaScript? · `TypeScript`
 √ Where to put your end-to-end tests? · `tests`
 √ Add a GitHub Actions workflow? (`y`/N) · `true`
@@ -82,8 +82,27 @@ Visit https://playwright.dev/docs/intro for more information. ✨
 Happy hacking! 🎭
 
 # Existing playwright install
-npm i 
+git pull / clone ...
+
+// install from package.json:
+npm install 
+
+// install browsers 
 npx playwright install
 
+# Run example tests
+npx playwright test
+
+# NVM vs FNM
+
+## installs fnm (Fast Node Manager)
+winget install Schniz.fnm
+## configure fnm environment
+fnm env --use-on-cd | Out-String | Invoke-Expression
+## download and install Node.js
+fnm use --install-if-missing 22
+
+## Update GIT BASH
+fnm env -> ~/.bashrc
 
 
