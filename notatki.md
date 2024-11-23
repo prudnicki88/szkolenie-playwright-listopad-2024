@@ -1,20 +1,22 @@
 # Instalacje
   
-Vs code
+## Vs code
 View -> Terminal (Ctrl+`)
 https://code.visualstudio.com/
 node -v 
 v20.17.0
 
-Node
+## Node
 https://nodejs.org/en
 npm -v 
 10.8.2
 
-Git
+## Git
 https://git-scm.com/downloads/win
 git -v 
 git version 2.40.1.windows.1
+
+F1 -> Terminal Default Profile => Bit bash
 
 testuj-sii-playwright-listopad
 
@@ -38,8 +40,8 @@ Initializing project in '.'
 > `TypeScript`
 √ Do you want to use TypeScript or JavaScript? · `TypeScript`
 √ Where to put your end-to-end tests? · `tests`
-√ Add a GitHub Actions workflow? (y/N) · `true`
-√ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · `true`
+√ Add a GitHub Actions workflow? (`y`/N) · `true`
+√ Install Playwright browsers (can be done manually via 'npx playwright install')? (`Y`/n) · `true`
 Initializing NPM project (npm init -y)…
 Wrote to C:\Projects\testuj-sii-playwright-listopad\package.json:
 ...
@@ -78,6 +80,10 @@ And check out the following files:
 Visit https://playwright.dev/docs/intro for more information. ✨
 
 Happy hacking! 🎭
+
+# Existing playwright install
+npm i 
+npx playwright install
 
 
 
