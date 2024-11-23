@@ -15,7 +15,6 @@ test("test", async ({ page }) => {
   await expect(page.locator("#introduction")).toContainText("Introduction");
 });
 
-
 test("Tabs by header", async ({ page }) => {
   // Recording...
   await page.goto("https://playwright.dev/");
@@ -23,11 +22,13 @@ test("Tabs by header", async ({ page }) => {
 
   page.locator("css=.tabs-container");
   page.getByText("Running the Example Test");
-  
-  page.locator("css=#running-the-example-test")
 
+  const Header = page.locator("css=#running-the-example-test");
+  const TabsFollowingHeader = Header.locator("~ .tabs-container");
 
-})
+  await expect(TabsFollowingHeader.first()).toBeVisible()
+});
+
 
 test("npm command is correct", async ({ page }) => {
   // Recording...
@@ -52,7 +53,9 @@ test("npm command is correct", async ({ page }) => {
 
   const FirstContainer = page.locator("css=.tabs-container").first();
   const Tabs = FirstContainer.locator("css=ul.tabs").getByRole("tab");
-  const NpmTab = FirstContainer.locator("css=ul.tabs").getByRole("tab").getByText('npm')
+  const NpmTab = FirstContainer.locator("css=ul.tabs")
+    .getByRole("tab")
+    .getByText("npm");
 
   // await expect(Tabs).toHaveText(['npm','yarn','banana'])
   await expect(Tabs).toHaveText(["npm", "yarn", "pnpm"]);
