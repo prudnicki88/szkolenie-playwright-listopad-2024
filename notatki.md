@@ -19,7 +19,11 @@ git version 2.40.1.windows.1
 testuj-sii-playwright-listopad
 
 # GIT
+File -> Open Folder -> ...
+View -> Terminal
 git clone https://bitbucket.org/ev45ive/testuj-sii-playwright-listopad.git
+
+F1 -> Git Clone -> {Wklej urk} -> Clone from URL -> Select location -> Open window
 
 # Opcja: InteliJ keyboard shortcuts
 https://marketplace.visualstudio.com/items?itemName=k--kato.intellij-idea-keybindings
