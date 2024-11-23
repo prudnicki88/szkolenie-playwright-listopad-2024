@@ -24,16 +24,22 @@ test("npm command is correct", async ({ page }) => {
   page.locator("css=#running-the-example-test");
   page.getByText("Running the Example Test");
 
-
   // Error: strict mode violation: locator('.tabs-container') resolved to 6 elements
   // await expect(page.locator("css=.tabs-container")).toBeVisible();
-  
-  await expect(page.locator("css=.tabs-container").first()).toBeVisible()
-  await expect(page.locator("css=.tabs-container").nth(2)).toBeVisible()
-  await expect(page.locator("css=.tabs-container")).toHaveCount(6)
+
+  await expect(page.locator("css=.tabs-container").first()).toBeVisible();
+  await expect(page.locator("css=.tabs-container").nth(2)).toBeVisible();
+  await expect(page.locator("css=.tabs-container")).toHaveCount(6);
   await expect(
     page
       .locator("css=.tabs-container")
       .filter({ hasText: "npm init playwright@latest" })
   ).toBeVisible();
+
+  const FirstContainer = page.locator("css=.tabs-container").first();
+
+  const Tabs = FirstContainer.locator("css=ul.tabs").getByRole("tab");
+
+  // await expect(Tabs).toHaveText(['npm','yarn','banana'])
+  await expect(Tabs).toHaveText(["npm", "yarn", "pnpm"]);
 });
