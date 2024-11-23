@@ -23,12 +23,21 @@ test("Tabs by header", async ({ page }) => {
   page.locator("css=.tabs-container");
   page.getByText("Running the Example Test");
 
+  // Find Parent by child
+  const SectionByHeader = page.locator(
+    ".section:has(#running-the-example-test)"
+  );
+
+  // page.locator(':below(#running-the-example-test)') // x < .
+  // page.locator(':below(#running-the-example-test):above(#html-test-reports)') 
+  page.locator('.tabs-container:below(#running-the-example-test)').first()
+
+  // Sibling
   const Header = page.locator("css=#running-the-example-test");
   const TabsFollowingHeader = Header.locator("~ .tabs-container");
 
-  await expect(TabsFollowingHeader.first()).toBeVisible()
+  await expect(TabsFollowingHeader.first()).toBeVisible();
 });
-
 
 test("npm command is correct", async ({ page }) => {
   // Recording...
