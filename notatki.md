@@ -122,26 +122,34 @@ fnm use --install-if-missing 22
 fnm env -> ~/.bashrc
 
 # Playwright config.ts
+
 - timeout
 
 - process.env.CI
 
-https://playwright.dev/docs/test-retries 
+https://playwright.dev/docs/test-retries
 flaky - tests that failed on the first run, but passed when retried;
 
 playwright test --project=chromium
 playwright test --project=my-mobile-chromium
 
 # NPM node package manager
+
 - npx - node package execute
 
-- npm i banana 
-- npx banana 
+- npm i banana
+- npx banana
 
-- npx playwright  
+- npx playwright
 
-- npm test  -> npm run test
-- npm run banana  -> scripts: banana 
+- npm test -> npm run test
+- npm run banana -> scripts: banana
 
 # VsCode playwright Extension
+
 https://marketplace.visualstudio.com/items?itemName=ms-playwright.playwright
+
+# Prettier
+
+Format with -> default formatter
+Alt+Shift+F
