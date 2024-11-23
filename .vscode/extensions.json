@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "ms-playwright.playwright",
+        "nitayneeman.playwright-snippets",
+        "dsznajder.es7-react-js-snippets",
+        "pulkitgangwar.nextjs-snippets",
+        "quicktype.quicktype",
+        "esbenp.prettier-vscode",
+        "yoavbls.pretty-ts-errors",
+        "bradlc.vscode-tailwindcss"
+    ]
+}

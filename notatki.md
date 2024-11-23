@@ -129,3 +129,14 @@ flaky - tests that failed on the first run, but passed when retried;
 
 playwright test --project=chromium
 playwright test --project=my-mobile-chromium
+
+# NPM node package manager
+- npx - node package execute
+
+- npm i banana 
+- npx banana 
+
+- npx playwright  
+
+- npm test  -> npm run test
+- npm run banana  -> scripts: banana 
