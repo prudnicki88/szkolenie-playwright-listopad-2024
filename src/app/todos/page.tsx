@@ -43,7 +43,7 @@ export default function TodosPage() {
     );
   };
   const saveTodo = (todo: Todo) => {
-    todo.dateChanged = new Date().toJSON();
+    todo.dateChanged = (new Date()).toJSON();
     setTodos(todos.map((t) => (t.id !== todo.id ? t : todo)));
   };
 

@@ -47,10 +47,11 @@ export const TodoItem = ({ todo, toggle, update, remove }: Props) => {
             }}
           >
             <span>{todo.title}</span>
-
-            <span className="text-sm">
-              {new Date(todo.dateChanged!).toLocaleTimeString()}
-            </span>
+            {todo.dateChanged && (
+              <span className="text-sm">
+                {new Date(todo.dateChanged).toLocaleTimeString()}
+              </span>
+            )}
           </label>
         )}
         <button
