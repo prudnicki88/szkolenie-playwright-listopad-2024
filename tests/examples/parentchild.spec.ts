@@ -40,13 +40,13 @@ test("Test with Fixure", async ({ page }) => {
   for (const product of productsFixture) {
     const Header = page.getByRole("heading", { name: product.header });
     const Parent = page.locator(".parent").filter({ has: Header });
-    await expect(Parent.getByText(product.message)).toBeVisible();
+    await expect.soft(Parent.getByText(product.message)).toBeVisible();
   }
 });
 
 function createProductsFixture() {
   const productsFixture = [
-    { header: "Header 1", message: "Komunikat 1" },
+    { header: "Header 1", message: "Komunikat 1123" },
     { header: "Header 2", message: "Komunikat 2" },
   ];
 
