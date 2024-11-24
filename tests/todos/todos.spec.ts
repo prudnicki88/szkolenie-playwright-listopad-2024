@@ -92,18 +92,31 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       const TodoItem = page.getByTestId("todo-item");
       const TodoTitle = page.getByTestId("todo-title");
       const ToggleTodo = page.getByLabel("Toggle Todo");
-      const BananaTodo = TodoTitle.getByText("banana");
 
+      const CheckedTodo = TodoItem.filter({
+        has: ToggleTodo.locator(":checked"),
+      });
+      // Arrange
+      const BananaTodo = TodoTitle.getByText("banana");
       const SelectedTodo = TodoItem.filter({
         has: BananaTodo,
       });
+      await expect(CheckedTodo).toHaveCount(0);
 
-      // await ToggleTodo.click(); // context=Page
-      // await SelectedTodo.getByLabel("Toggle Todo").click(); // Context=SelectedTodo
-      // await SelectedTodo.locator(page.getByLabel("Toggle Todo")).click(); // Context=SelectedTodo
-      await SelectedTodo.locator(ToggleTodo).click(); // Context=SelectedTodo
+      // Act
+      await SelectedTodo.locator(ToggleTodo).click();
 
-      await expect(TodoItem).toHaveCount(3);
+      // Assert
+      // .completed
+      // await expect(SelectedTodo.getAttribute('class')).toMatch("completed");
+      await expect(SelectedTodo).toHaveClass(/completed/);
+
+      // :checked
+      await expect(SelectedTodo.locator(ToggleTodo)).toBeChecked();
+      // await expect(CheckedTodo).toHaveCount(1)
+
+      // text-decoration: line-through
+      await expect(SelectedTodo.locator(TodoTitle)).toHaveCSS("text-decoration", /line-through/);
     });
   });
 });
