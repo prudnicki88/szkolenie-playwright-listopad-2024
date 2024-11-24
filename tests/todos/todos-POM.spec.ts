@@ -1,5 +1,6 @@
 import test, { expect } from "@playwright/test";
 import { setup } from "./setup";
+import { TodosPOM } from "./TodosPOM";
 
 // https://playwright.dev/docs/api/class-test#test-after-each
 
@@ -24,49 +25,42 @@ test.describe("todos", { tag: ["@todos"] }, () => {
   test.describe("Adding todos", () => {
     test("Add one todo", async ({ page }) => {
       // Arrange - Given...
+      const pom = new TodosPOM(page);
+
       const todoText = "Here is my TODO";
-      const { TodoInput, TodoItem, TodoTitle } = setup(page);
+      await pom.addTodo(todoText);
 
-      // Act  - When...
-      await TodoInput.fill(todoText);
-      await TodoInput.press("Enter");
-
-      // Assert  - Then...
-      const NewTodo = TodoItem.filter({
-        has: TodoTitle.getByText(todoText),
-      });
+      const NewTodo = pom.getTodoByText(todoText);
       await expect(NewTodo).toBeVisible();
     });
 
     test("Counting new todos", async ({ page }) => {
-      const { TodoCounter, TodoItem, TodoInput, addTodo } = setup(page);
+      const pom = new TodosPOM(page);
 
       // Arrange
-      await expect(TodoCounter).toHaveText("3 items left");
-      await expect(TodoItem).toHaveCount(3);
+      await expect(pom.TodoCounter).toHaveText("3 items left");
+      await expect(pom.TodoItem).toHaveCount(3);
 
       // Arrange
-      // await TodoInput.fill("Here is my TODO");
-      // await TodoInput.press("Enter");
-
-      await addTodo('Great todo!')
+      await pom.addTodo("Great todo!");
 
       // Arrange
-      await expect(TodoCounter).toHaveText("4 items left");
-      await expect(TodoItem).toHaveCount(4);
+      await expect(pom.TodoCounter).toHaveText("4 items left");
+      await expect(pom.TodoItem).toHaveCount(4);
     });
 
     test("Removing todos", async ({ page }) => {
       // Arrange
-      const { TodoItem, TodoDelete, FirstTodo: SelectedTodo } = setup(page);
-      await expect(TodoItem).toHaveCount(3);
+      const pom = new TodosPOM(page);
+
+      await expect(pom.TodoItem).toHaveCount(3);
 
       // Act
-      await SelectedTodo.hover();
-      await SelectedTodo.locator(TodoDelete).click();
+      await pom.FirstTodo.hover();
+      await pom.FirstTodo.locator(pom.TodoDelete).click();
 
       // Assert
-      await expect(TodoItem).toHaveCount(2);
+      await expect(pom.TodoItem).toHaveCount(2);
     });
   });
 

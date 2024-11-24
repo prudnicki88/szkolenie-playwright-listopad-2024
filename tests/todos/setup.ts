@@ -1,6 +1,7 @@
-import type { Page } from "@playwright/test";
+import { expect, type Page } from "@playwright/test";
 
 export function setup(page: Page) {
+  
   const TodoInput = page.getByPlaceholder("What needs to be done?");
   const TodoItem = page.getByTestId("todo-item");
   const TodoTitle = page.getByTestId("todo-title");
@@ -15,16 +16,19 @@ export function setup(page: Page) {
 
   /**
    * Creates New Todo
-   * @param {string} text Text [text="Here is my TODO"] 
+   * @param {string} text Text [text="Here is my TODO"]
    */
   async function addTodo(text: string = "Here is my TODO") {
     await TodoInput.fill(text);
     await TodoInput.press("Enter");
   }
+  async function expectTodoCount(number: number) {
+    return expect(TodoItem).toHaveCount(number);
+  }
 
   return {
     addTodo,
-
+    expectTodoCount,
     /**
      * Todo Item List
      *
