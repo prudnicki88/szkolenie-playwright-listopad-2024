@@ -44,7 +44,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       await expect(NewTodo).toBeVisible();
     });
 
-    test.only("Counting new todos", async ({ page }) => {
+    test("Counting new todos", async ({ page }) => {
       const TodoCounter = page.getByTestId("todo-count");
       const TodoInput = page.getByPlaceholder("What needs to be done?");
       const TodoItem = page.getByTestId("todo-item");
@@ -57,6 +57,26 @@ test.describe("todos", { tag: ["@todos"] }, () => {
 
       await expect(TodoCounter).toHaveText("4 items left");
       await expect(TodoItem).toHaveCount(4);
+    });
+
+    test("Removing todos", async ({ page }) => {
+      // test.setTimeout(50000) // debugg
+      
+      const TodoItem = page.getByTestId("todo-item");
+      const TodoDelete = page.getByRole("button", { name: "Delete" });
+      const TodoCounter = page.getByTestId("todo-count");
+      
+      // debugger; // breakpoint
+      
+      const SelectedTodo = TodoItem.first();
+
+      await expect(TodoItem).toHaveCount(3);
+      await SelectedTodo.hover(); 
+
+      await SelectedTodo.locator(TodoDelete).click();
+      // .click({force:true}); // Not User-Centric!
+
+      await expect(TodoItem).toHaveCount(2);
     });
   });
 
