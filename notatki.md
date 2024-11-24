@@ -171,6 +171,7 @@ https://regexone.com/
 # NextJS
 cd katalog/gdzie/checem/to
 
+## Install
 npx create-next-app@latest
 
 √ What is your project named? ... my-app
@@ -186,6 +187,12 @@ Creating a new Next.js app in C:\Projects\testuj-sii-playwright-listopad\my-app.
 Extensions
 - Tailwind
 - Nextjs snippets
+
+## Start 
+npm i 
+npm run dev
+
+open in browser: http://localhost:3000/   (Ctrl+CLick)
 
 plki:             app/jaka/ma/byc/sciezka/page.tsx
 http://localhost:3000/jaka/ma/byc/sciezka/
