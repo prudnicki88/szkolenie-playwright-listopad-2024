@@ -1,10 +1,34 @@
-import type { Page } from "@playwright/test";
+import type { Locator, Page } from "@playwright/test";
+
+export class TodoItemPOM {
+  constructor(private TodoItem: Locator) {}
+
+  TodoDelete = this.TodoItem.getByRole("button", { name: "Delete" });
+  ToggleTodo = this.TodoItem.getByLabel("Toggle Todo");
+
+  hover() {
+    return this.TodoItem.hover();
+  }
+
+  async complete() {
+    await this.ToggleTodo.click();
+  }
+
+  async remove() {
+    await this.hover();
+    await this.TodoDelete.click();
+  }
+}
 
 export class TodosPOM {
   // page:Page;
 
   constructor(readonly page: Page) {
     // this.page = page;
+  }
+
+  getFirstTodoPOM() {
+    return new TodoItemPOM(this.TodoItem.first());
   }
 
   //   getTodoItem() {

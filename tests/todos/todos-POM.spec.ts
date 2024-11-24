@@ -56,8 +56,12 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       await expect(pom.TodoItem).toHaveCount(3);
 
       // Act
-      await pom.FirstTodo.hover();
-      await pom.FirstTodo.locator(pom.TodoDelete).click();
+      const itemPOM = pom.getFirstTodoPOM();
+      itemPOM.complete();
+      itemPOM.remove();
+
+      // await pom.FirstTodo.hover();
+      // await pom.FirstTodo.locator(pom.TodoDelete).click();
 
       // Assert
       await expect(pom.TodoItem).toHaveCount(2);
