@@ -85,7 +85,47 @@ test.describe("todos", { tag: ["@todos"] }, () => {
 
     test("Shows all todos", async ({ page }) => {
       const TodoItem = page.getByTestId("todo-item");
+      const ToggleTodo = page.getByLabel("Toggle Todo");
+      const FirstToggle = TodoItem.first().locator(ToggleTodo);
+
+      await expect(page.getByRole("link", { name: "All" })).toHaveClass(
+        /selected/
+      );
+
+      await FirstToggle.click(); // Select
       await expect(TodoItem).toHaveCount(3);
+
+      await FirstToggle.click(); // Un-Select
+      await expect(TodoItem).toHaveCount(3);
+    });
+
+    test("Shows active todos", async ({ page }) => {
+      const TodoItem = page.getByTestId("todo-item");
+      const ToggleTodo = page.getByLabel("Toggle Todo");
+      const FirstToggle = TodoItem.first().locator(ToggleTodo);
+      const ActiveFilterLink = page.getByRole("link", { name: "Active" });
+
+      await expect(page.getByText("No todos to show")).not.toBeVisible();
+
+      await FirstToggle.click(); // Select
+      await expect(TodoItem).toHaveCount(3);
+
+      await ActiveFilterLink.click();
+      await expect(ActiveFilterLink).toHaveClass(/selected/);
+      await expect(TodoItem).toHaveCount(2);
+
+      await FirstToggle.click(); // Select
+      await expect(TodoItem).toHaveCount(1);
+
+      await FirstToggle.click(); // Select
+      await expect(TodoItem).toHaveCount(0);
+
+      await expect(page.getByText("No todos to show")).toBeVisible();
+    });
+
+    test("Shows completed todos", async ({ page }) => {
+      const TodoItem = page.getByTestId("todo-item");
+      await expect(TodoItem).toHaveCount(0);
     });
 
     test("Completing todo", async ({ page }) => {
@@ -93,9 +133,8 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       const TodoTitle = page.getByTestId("todo-title");
       const ToggleTodo = page.getByLabel("Toggle Todo");
 
-      const CheckedTodo = TodoItem.filter({
-        has: ToggleTodo.locator(":checked"),
-      });
+      const CheckedTodo = TodoItem.locator(":checked");
+
       // Arrange
       const BananaTodo = TodoTitle.getByText("banana");
       const SelectedTodo = TodoItem.filter({
@@ -113,10 +152,13 @@ test.describe("todos", { tag: ["@todos"] }, () => {
 
       // :checked
       await expect(SelectedTodo.locator(ToggleTodo)).toBeChecked();
-      // await expect(CheckedTodo).toHaveCount(1)
+      await expect(CheckedTodo).toHaveCount(1);
 
       // text-decoration: line-through
-      await expect(SelectedTodo.locator(TodoTitle)).toHaveCSS("text-decoration", /line-through/);
+      await expect(SelectedTodo.locator(TodoTitle)).toHaveCSS(
+        "text-decoration",
+        /line-through/
+      );
     });
   });
 });
