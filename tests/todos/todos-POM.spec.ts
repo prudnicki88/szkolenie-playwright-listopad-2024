@@ -72,7 +72,11 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     // test.beforeEach(() => {  /* Add some todos... */  });
 
     test("Shows all todos", async ({ page }) => {
-      const { FirstToggle, AllTodoItems, CompletedTodoItem } = setup4(page);
+      const {
+        FirstToggle,
+        TodoItem: AllTodoItems,
+        CompletedTodoItem,
+      } = setup(page);
 
       await expect(page.getByRole("link", { name: "All" })).toHaveClass(
         /selected/
@@ -88,7 +92,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     });
 
     test("Shows active todos", async ({ page }) => {
-      const { FirstToggle, TodoItem, ActiveFilterLink } = setup5(page);
+      const { FirstToggle, TodoItem, ActiveFilterLink } = setup(page);
 
       // We have some todos
       await expect(page.getByText("No todos to show")).not.toBeVisible();

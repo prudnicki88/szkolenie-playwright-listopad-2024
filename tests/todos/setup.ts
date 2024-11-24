@@ -10,18 +10,30 @@ export function setup(page: Page) {
   const ToggleTodo = page.getByLabel("Toggle Todo");
   const FirstToggle = AllTodoItems.first().locator(ToggleTodo);
   const CompletedTodoItem = AllTodoItems.locator(":checked");
+
   const ActiveFilterLink = page.getByRole("link", { name: "Active" });
+
   const FirstTodo = TodoItem.first();
 
   return {
-    TodoInput,
+    /**
+     * Todo Item List
+     * 
+     * ```ts
+     *  await expect(AllTodoItems).toHaveCount(3);
+     * ```
+     */
     TodoItem,
-    TodoTitle,
-    TodoCounter,
-    TodoDelete,
     FirstToggle,
     CompletedTodoItem,
+    TodoInput,
+    TodoTitle,
+    TodoDelete,
+    /**
+     * Filters todo - not completed only!
+     */
     ActiveFilterLink,
+    TodoCounter,
     FirstTodo,
   };
 }
