@@ -27,7 +27,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
   });
 
   test.describe("Adding todos", () => {
-    test.only("Add one todo", async ({ page }) => {
+    test("Add one todo", async ({ page }) => {
       const todoText = "Here is my TODO";
       const TodoInput = page.getByPlaceholder("What needs to be done?");
 
@@ -44,11 +44,19 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       await expect(NewTodo).toBeVisible();
     });
 
-    test("Counting new todos", async ({ page }) => {
+    test.only("Counting new todos", async ({ page }) => {
       const TodoCounter = page.getByTestId("todo-count");
-      expect(TodoCounter).toHaveText("3 items left");
+      const TodoInput = page.getByPlaceholder("What needs to be done?");
+      const TodoItem = page.getByTestId("todo-item");
 
-      //   await expect().toBeVisible();
+      expect(TodoCounter).toHaveText("3 items left");
+      expect(TodoItem).toHaveCount(3);
+
+      await TodoInput.fill("Here is my TODO");
+      await TodoInput.press("Enter");
+
+      expect(TodoCounter).toHaveText("4 items left");
+      expect(TodoItem).toHaveCount(4);
     });
   });
 
