@@ -1,4 +1,5 @@
 import test, { expect } from "@playwright/test";
+import { setup } from "./setup";
 
 // https://playwright.dev/docs/api/class-test#test-after-each
 
@@ -24,9 +25,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     test("Add one todo", async ({ page }) => {
       // Arrange - Given...
       const todoText = "Here is my TODO";
-      const TodoInput = page.getByPlaceholder("What needs to be done?");
-      const TodoItem = page.getByTestId("todo-item");
-      const TodoTitle = page.getByTestId("todo-title");
+      const { TodoInput, TodoItem, TodoTitle } = setup(page);
 
       // Act  - When...
       await TodoInput.fill(todoText);
@@ -40,9 +39,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     });
 
     test("Counting new todos", async ({ page }) => {
-      const TodoCounter = page.getByTestId("todo-count");
-      const TodoInput = page.getByPlaceholder("What needs to be done?");
-      const TodoItem = page.getByTestId("todo-item");
+      const { TodoCounter, TodoItem, TodoInput } = setup(page);
 
       // Arrange
       await expect(TodoCounter).toHaveText("3 items left");
@@ -59,10 +56,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
 
     test("Removing todos", async ({ page }) => {
       // Arrange
-      const TodoItem = page.getByTestId("todo-item");
-      const TodoDelete = page.getByRole("button", { name: "Delete" });
-      const TodoCounter = page.getByTestId("todo-count");
-      const SelectedTodo = TodoItem.first();
+      const { TodoItem, TodoDelete, FirstTodo: SelectedTodo } = setup(page);
       await expect(TodoItem).toHaveCount(3);
 
       // Act
@@ -78,10 +72,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     // test.beforeEach(() => {  /* Add some todos... */  });
 
     test("Shows all todos", async ({ page }) => {
-      const AllTodoItems = page.getByTestId("todo-item");
-      const ToggleTodo = page.getByLabel("Toggle Todo");
-      const FirstToggle = AllTodoItems.first().locator(ToggleTodo);
-      const CompletedTodoItem = AllTodoItems.locator(":checked");
+      const { FirstToggle, AllTodoItems, CompletedTodoItem } = setup4(page);
 
       await expect(page.getByRole("link", { name: "All" })).toHaveClass(
         /selected/
@@ -97,10 +88,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     });
 
     test("Shows active todos", async ({ page }) => {
-      const TodoItem = page.getByTestId("todo-item");
-      const ToggleTodo = page.getByLabel("Toggle Todo");
-      const FirstToggle = TodoItem.first().locator(ToggleTodo);
-      const ActiveFilterLink = page.getByRole("link", { name: "Active" });
+      const { FirstToggle, TodoItem, ActiveFilterLink } = setup5(page);
 
       // We have some todos
       await expect(page.getByText("No todos to show")).not.toBeVisible();
