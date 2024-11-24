@@ -2,7 +2,7 @@
 
 export default function Page() {
   return (
-    <div>
+    <div className="grid gap-5">
       <h1>Witaj w Next</h1>
 
       <p>Test is Komunikat matching Header </p>

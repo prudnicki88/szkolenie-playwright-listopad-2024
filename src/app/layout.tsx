@@ -28,7 +28,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="container my-5 grid gap-5">{children}</div>
+        <div className="container my-5 grid gap-5">{children}
+
+        <a className="mt-10" href="/"> &laquo; Homepage </a>
+        </div>
+        
       </body>
     </html>
   );
