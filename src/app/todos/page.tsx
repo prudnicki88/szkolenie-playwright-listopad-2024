@@ -143,6 +143,8 @@ export default function TodosPage() {
             </button>
           )}
         </footer>
+
+        <a href="/"> {'<<'} Homepage </a>
       </div>
     </div>
   );

@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "completed": false,
+        "title": "Todo Banana"
+    },
+    {
+        "id": "2",
+        "completed": false,
+        "title": "Todo Avocado"
+    },
+    {
+        "id": "3",
+        "completed": false,
+        "title": "Todo Cantalupe"
+    }
+]
