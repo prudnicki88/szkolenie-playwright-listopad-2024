@@ -209,3 +209,14 @@ export default function Page() {
 }
 ```
 
+
+# Playground
+
+https://qaplayground.dev/
+https://github.com/marko-simic/qa-playground-tests/tree/main/tests
+
+https://demo.playwright.dev/todomvc/#/
+..\tests-examples\demo-todo-app.spec.ts
+
+https://example.cypress.io/commands/actions
+
