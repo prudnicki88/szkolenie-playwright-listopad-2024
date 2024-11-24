@@ -10,15 +10,24 @@ export function setup(page: Page) {
   const ToggleTodo = page.getByLabel("Toggle Todo");
   const FirstToggle = AllTodoItems.first().locator(ToggleTodo);
   const CompletedTodoItem = AllTodoItems.locator(":checked");
-
   const ActiveFilterLink = page.getByRole("link", { name: "Active" });
-
   const FirstTodo = TodoItem.first();
 
+  /**
+   * Creates New Todo
+   * @param {string} text Text [text="Here is my TODO"] 
+   */
+  async function addTodo(text: string = "Here is my TODO") {
+    await TodoInput.fill(text);
+    await TodoInput.press("Enter");
+  }
+
   return {
+    addTodo,
+
     /**
      * Todo Item List
-     * 
+     *
      * ```ts
      *  await expect(AllTodoItems).toHaveCount(3);
      * ```
@@ -35,5 +44,6 @@ export function setup(page: Page) {
     ActiveFilterLink,
     TodoCounter,
     FirstTodo,
+    ToggleTodo,
   };
 }

@@ -39,15 +39,17 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     });
 
     test("Counting new todos", async ({ page }) => {
-      const { TodoCounter, TodoItem, TodoInput } = setup(page);
+      const { TodoCounter, TodoItem, TodoInput, addTodo } = setup(page);
 
       // Arrange
       await expect(TodoCounter).toHaveText("3 items left");
       await expect(TodoItem).toHaveCount(3);
 
       // Arrange
-      await TodoInput.fill("Here is my TODO");
-      await TodoInput.press("Enter");
+      // await TodoInput.fill("Here is my TODO");
+      // await TodoInput.press("Enter");
+
+      await addTodo('Great todo!')
 
       // Arrange
       await expect(TodoCounter).toHaveText("4 items left");
@@ -121,9 +123,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     });
 
     test("Completing todo", async ({ page }) => {
-      const TodoItem = page.getByTestId("todo-item");
-      const TodoTitle = page.getByTestId("todo-title");
-      const ToggleTodo = page.getByLabel("Toggle Todo");
+      const { TodoItem, TodoTitle, ToggleTodo } = setup(page);
 
       const CheckedTodo = TodoItem.locator(":checked");
 
