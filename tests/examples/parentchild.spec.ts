@@ -18,6 +18,8 @@ test("Komunikat matching Header", async ({ page }) => {
 });
 
 test("Test all Komuniats - Regexp match", async ({ page }) => {
+  await page.goto("http://localhost:3000/examples");
+
   const Parents = page.locator(".parent");
   const ParentLocators = await Parents.all();
   const count = await Parents.count();
@@ -29,3 +31,24 @@ test("Test all Komuniats - Regexp match", async ({ page }) => {
     await expect(Parent.getByText(`Komunikat ${id}`)).toBeVisible();
   }
 });
+
+test("Test with Fixure", async ({ page }) => {
+  await page.goto("http://localhost:3000/examples");
+
+  const productsFixture = createProductsFixture();
+
+  for (const product of productsFixture) {
+    const Header = page.getByRole("heading", { name: product.header });
+    const Parent = page.locator(".parent").filter({ has: Header });
+    await expect(Parent.getByText(product.message)).toBeVisible();
+  }
+});
+
+function createProductsFixture() {
+  const productsFixture = [
+    { header: "Header 1", message: "Komunikat 1" },
+    { header: "Header 2", message: "Komunikat 2" },
+  ];
+
+  return productsFixture;
+}
