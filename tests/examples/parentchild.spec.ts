@@ -52,3 +52,8 @@ function createProductsFixture() {
 
   return productsFixture;
 }
+
+function addProducts(){
+    // fill form...
+    // add product...
+}
