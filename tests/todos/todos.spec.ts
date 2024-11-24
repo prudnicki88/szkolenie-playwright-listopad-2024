@@ -5,6 +5,16 @@ import test from "@playwright/test";
 // test.beforeAll(async ({page})=>{ }) // !
 // test.afterEach(() => {});
 
+/* 
+    Todos:
+     - Adding 
+     - Completing
+     - Counter
+     - Removing
+     - Filtering
+     - Dates
+*/
+
 test.describe("todos", { tag: ["todos"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:3000/todos/");
