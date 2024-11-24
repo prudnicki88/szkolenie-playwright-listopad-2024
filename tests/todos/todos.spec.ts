@@ -84,19 +84,22 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     // test.beforeEach(() => {  /* Add some todos... */  });
 
     test("Shows all todos", async ({ page }) => {
-      const TodoItem = page.getByTestId("todo-item");
+      const AllTodoItems = page.getByTestId("todo-item");
       const ToggleTodo = page.getByLabel("Toggle Todo");
-      const FirstToggle = TodoItem.first().locator(ToggleTodo);
+      const FirstToggle = AllTodoItems.first().locator(ToggleTodo);
+      const CompletedTodoItem = AllTodoItems.locator(":checked")
 
       await expect(page.getByRole("link", { name: "All" })).toHaveClass(
         /selected/
       );
 
       await FirstToggle.click(); // Select
-      await expect(TodoItem).toHaveCount(3);
-
+      await expect(AllTodoItems).toHaveCount(3);
+      await expect(CompletedTodoItem).toHaveCount(2);
+      
       await FirstToggle.click(); // Un-Select
-      await expect(TodoItem).toHaveCount(3);
+      await expect(AllTodoItems).toHaveCount(3);
+      await expect(CompletedTodoItem).toHaveCount(3);
     });
 
     test("Shows active todos", async ({ page }) => {
@@ -105,8 +108,10 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       const FirstToggle = TodoItem.first().locator(ToggleTodo);
       const ActiveFilterLink = page.getByRole("link", { name: "Active" });
 
+      // We have some todos
       await expect(page.getByText("No todos to show")).not.toBeVisible();
 
+      // We complete first
       await FirstToggle.click(); // Select
       await expect(TodoItem).toHaveCount(3);
 
@@ -121,9 +126,10 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       await expect(TodoItem).toHaveCount(0);
 
       await expect(page.getByText("No todos to show")).toBeVisible();
+      await expect(page.getByText("no more items left")).toBeVisible();
     });
 
-    test("Shows completed todos", async ({ page }) => {
+    test("TODO: Shows completed todos", async ({ page }) => {
       const TodoItem = page.getByTestId("todo-item");
       await expect(TodoItem).toHaveCount(0);
     });
