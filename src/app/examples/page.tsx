@@ -12,15 +12,17 @@ export default function Page() {
 
       <div className="parent">
         <h1>Header 2 </h1>
+        <p>Produkt 2</p>
 
         <div className="child">
           <p>Komunikat 2</p>
           {/* <p>Komunikat 1</p> - blad! */}
+          <button>Add to Cart</button>
         </div>
       </div>
 
       <div className="parent">
-        <h1>Header 1 </h1>
+        <h1>Header 1</h1>
 
         <div className="child">
           <p>Komunikat 1</p>  
