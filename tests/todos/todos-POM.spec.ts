@@ -2,28 +2,9 @@ import test, { expect } from "@playwright/test";
 
 // https://playwright.dev/docs/api/class-test#test-after-each
 
-// test.beforeAll(async ({page})=>{ }) // !
-// test.afterEach(() => {});
-
-/* 
-    Todos:
-     - Adding 
-     - Completing
-     - Counter
-     - Removing
-     - Filtering
-     - Dates
-*/
-
 test.describe("todos", { tag: ["@todos"] }, () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("http://localhost:3000/todos/");
-    const TodoItem = page.getByTestId("todo-item");
-    const TodoTitle = page.getByTestId("todo-title");
-    const ToggleTodo = page.getByLabel("Toggle Todo");
-    const TodoCounter = page.getByTestId("todo-count");
-    const TodoDelete = page.getByRole("checkbox", { name: "Delete" });
-    const TodoInput = page.getByPlaceholder("What needs to be done?");
   });
 
   test.describe("Todo time", () => {
