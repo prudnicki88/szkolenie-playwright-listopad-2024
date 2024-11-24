@@ -1,6 +1,6 @@
 export default function Page() {
   return (
-    <div className="grid">
+    <div className="grid gap-5">
       <h1>Podstrona</h1>
 
       <div className="nasza klasa">
