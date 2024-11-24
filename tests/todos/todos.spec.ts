@@ -28,6 +28,9 @@ test.describe("todos", { tag: ["@todos"] }, () => {
 
   test.describe("Todo time", () => {
     test("Test clock", async ({ page }) => {
+      page.clock.install({ time: new Date("2020-02-10T15:00:00") }); // Before goto!
+      await page.goto("http://localhost:3000/todos/");
+
       page.clock.setFixedTime(new Date("2020-02-10T15:00:00"));
       const Clock = page.getByTestId("clock");
 
