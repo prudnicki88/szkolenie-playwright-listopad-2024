@@ -15,15 +15,18 @@ import test, { expect } from "@playwright/test";
      - Dates
 */
 
+import todosJSON from "../../public/todos.json";
+
 test.describe("todos", { tag: ["@todos"] }, () => {
   test.beforeEach(async ({ page }) => {
+    await page.route("**/todos.json", (route) => {
+      return route.fulfill({
+        json: [...todosJSON.map((p) => ({ ...p, title: p.title + "Mock" }))],
+      });
+    });
+
     await page.goto("http://localhost:3000/todos/");
-    const TodoItem = page.getByTestId("todo-item");
-    const TodoTitle = page.getByTestId("todo-title");
-    const ToggleTodo = page.getByLabel("Toggle Todo");
-    const TodoCounter = page.getByTestId("todo-count");
-    const TodoDelete = page.getByRole("checkbox", { name: "Delete" });
-    const TodoInput = page.getByPlaceholder("What needs to be done?");
+    await expect(page.getByTestId('todo-item')).toHaveCount(3)
   });
 
   test.describe("Todo time", () => {
