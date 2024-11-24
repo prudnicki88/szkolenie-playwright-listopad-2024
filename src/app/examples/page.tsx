@@ -1,3 +1,5 @@
+// http://localhost:3000/examples/
+
 export default function Page() {
   return (
     <div>
@@ -8,13 +10,14 @@ export default function Page() {
 
       <div className="parent">
         <h1>Header 1 </h1>
+
         <div className="child">
           <p>Komunikat 1</p>
         </div>
       </div>
 
       <div className="parent">
-        <h1>Header 1 </h1>
+        <h1>Header 2 </h1>
 
         <div className="child">
           <p>Komunikat 2</p>
