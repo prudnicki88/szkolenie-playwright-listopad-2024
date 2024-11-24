@@ -49,14 +49,14 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       const TodoInput = page.getByPlaceholder("What needs to be done?");
       const TodoItem = page.getByTestId("todo-item");
 
-      expect(TodoCounter).toHaveText("3 items left");
-      expect(TodoItem).toHaveCount(3);
+      await expect(TodoCounter).toHaveText("3 items left");
+      await expect(TodoItem).toHaveCount(3);
 
       await TodoInput.fill("Here is my TODO");
       await TodoInput.press("Enter");
 
-      expect(TodoCounter).toHaveText("4 items left");
-      expect(TodoItem).toHaveCount(4);
+      await expect(TodoCounter).toHaveText("4 items left");
+      await expect(TodoItem).toHaveCount(4);
     });
   });
 
