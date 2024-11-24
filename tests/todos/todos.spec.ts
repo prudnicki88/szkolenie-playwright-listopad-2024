@@ -26,6 +26,16 @@ test.describe("todos", { tag: ["@todos"] }, () => {
     const TodoInput = page.getByPlaceholder("What needs to be done?");
   });
 
+  test.describe("Todo time", () => {
+    test("Test clock", async ({ page }) => {
+      page.clock.setFixedTime(new Date("2020-02-10T15:00:00"));
+      const Clock = page.getByTestId("clock");
+
+      await expect(Clock).toHaveText(/\d{1,2}:\d{1,2}:\d{1,2} PM/);
+      await expect(Clock).toHaveText("3:00:00 PM");
+    });
+  });
+
   test.describe("Adding todos", () => {
     test("Add one todo", async ({ page }) => {
       // Arrange - Given...
@@ -87,7 +97,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       const AllTodoItems = page.getByTestId("todo-item");
       const ToggleTodo = page.getByLabel("Toggle Todo");
       const FirstToggle = AllTodoItems.first().locator(ToggleTodo);
-      const CompletedTodoItem = AllTodoItems.locator(":checked")
+      const CompletedTodoItem = AllTodoItems.locator(":checked");
 
       await expect(page.getByRole("link", { name: "All" })).toHaveClass(
         /selected/
@@ -96,7 +106,7 @@ test.describe("todos", { tag: ["@todos"] }, () => {
       await FirstToggle.click(); // Select
       await expect(AllTodoItems).toHaveCount(3);
       await expect(CompletedTodoItem).toHaveCount(2);
-      
+
       await FirstToggle.click(); // Un-Select
       await expect(AllTodoItems).toHaveCount(3);
       await expect(CompletedTodoItem).toHaveCount(3);

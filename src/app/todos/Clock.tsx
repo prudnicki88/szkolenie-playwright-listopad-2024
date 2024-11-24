@@ -9,5 +9,5 @@ export const Clock = () => {
     setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
   }, []);
 
-  return <div className="text-center">{time}</div>;
+  return <div className="text-center" data-testid="clock">{time}</div>;
 };
