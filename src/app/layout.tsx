@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import NavBar from "./(music)/common/components/NavBar";
+import QueryContext from "./(music)/common/context/QueryContext";
+import UserProvider from "./(music)/common/context/UserProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,11 +31,17 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="container my-5 grid gap-5">{children}
-
-        <a className="mt-10" href="/"> &laquo; Homepage </a>
-        </div>
-        
+        <QueryContext>
+          <UserProvider>
+            <NavBar />
+            <div className="container my-5 grid gap-5">
+              {children}
+              <a className="mt-10" href="/">
+                &laquo; Homepage{" "}
+              </a>
+            </div>
+          </UserProvider>
+        </QueryContext>
       </body>
     </html>
   );

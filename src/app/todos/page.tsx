@@ -20,7 +20,6 @@ export default function TodosPage() {
 
   const editorRef = useRef<HTMLInputElement>(null);
   const addTodo = (title: string) => {
-    debugger
     const todo = {
       id: crypto.randomUUID(),
       completed: false,
